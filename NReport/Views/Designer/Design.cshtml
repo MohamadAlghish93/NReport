@@ -1,0 +1,41 @@
+﻿@model NReport.Models.DesignModel
+
+@{
+    ViewBag.Title = "Design";
+}
+
+
+<script type="text/javascript">
+    function reportDesigner_ExitDesigner(s, e) {
+        window.location = '@Url.Action("Index", new { token = "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c" })';
+    }
+</script>
+
+
+
+@{
+    var designer = Html.DevExpress().ReportDesigner(settings =>
+    {
+        settings.Name = "reportDesigner";
+
+        settings.Height = Unit.Percentage(100);
+        settings.ControlStyle.CssClass = "fullscreen";
+
+        if (Model.DataSource != null)
+        {
+            settings.DataSources.Add("Tarasol", Model.DataSource);
+        }
+
+        settings.ClientSideEvents.ExitDesigner = "reportDesigner_ExitDesigner";
+
+    });
+
+    if (Model.Url != null)
+    {
+        designer.BindToUrl(Model.Url).Render();
+    }
+    else
+    {
+        designer.Bind(new XtraReport()).Render();
+    }
+}

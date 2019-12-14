@@ -1,0 +1,48 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.fullscreen {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.closeAction {
+    background-image: url('Close.png');
+    background-repeat: no-repeat;
+}
+
+.btn_index_add {
+    background: url('Images/add.svg') no-repeat;
+}
+
+.btn_index_view {
+    background: url('icons/open.png') no-repeat;
+}
+
+.btn_index_edit {
+    background-image: url(Images/edit.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: block;
+    height: 23px;
+}
+
+.btn_index_delete {
+    background: url('Images/delete.svg') no-repeat;
+}
+
+.btn_index_export {
+    background: url('Images/export.svg') no-repeat;
+}
+
+.btn_index_search {
+    background: url('Images/search.svg') no-repeat;
+}
+
+.btn_index_search_un {
+    background: url('Images/search-selected.svg') no-repeat;
+}
+

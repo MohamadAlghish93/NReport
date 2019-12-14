@@ -1,0 +1,36 @@
+﻿@model NReport.Models.DesignModel
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script type="text/javascript">
+    function reportDesigner_ExitDesigner(s, e) {
+        window.location = '@Url.Action("Index", new { token = "SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c" })';
+    }
+
+</script>
+
+@{
+    var viewer = Html.DevExpress().WebDocumentViewer(settings =>
+    {
+        settings.Name = "reportDesigner";
+
+        settings.Height = Unit.Percentage(100);
+        settings.ControlStyle.CssClass = "fullscreen";
+        
+
+        settings.MenuItems.Add(new DevExpress.XtraReports.Web.WebDocumentViewer.WebDocumentViewerMenuItem {
+            Text = "Exist",  
+            JSClickAction = "function() { reportDesigner_ExitDesigner(); }",
+            ImageClassName = "closeAction"
+        });
+
+    });
+
+    viewer.Bind(Model.Url).Render();
+}
+
+
