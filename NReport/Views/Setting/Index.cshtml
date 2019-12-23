@@ -1,0 +1,197 @@
+﻿@model NReport.SettingModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    $().ready(function () {
+        $("#ValidationForm").validate({
+            showErrors: function (errorMap, errorList) {
+            },
+            rules: {
+                ServerName: {
+                    required: true
+                },
+                DatabaseName: {
+                    required: true
+                },
+                UserName: {
+                    required: true,
+                },
+                Password: {
+                    required: true
+                }
+            },
+            messages: {
+                ServerName: {
+                    required: "Server Name is required"
+                },
+                DatabaseName: {
+                    range: "Data Base is required"
+                },
+                UserName: {
+                    required: "User Name is required"
+                },
+                Password: {
+                    required: "Password is required"
+                }
+            }
+        });
+    });
+</script>
+
+@{
+    Html.EnableClientValidation(false);
+    Html.EnableUnobtrusiveJavaScript(false);
+}
+
+
+
+@using (Html.BeginForm("saveSetting", "Setting", FormMethod.Post, new { id = "ValidationForm", @class = "edit_form" }))
+{
+    <div style="padding-top:30px">
+        @Html.DevExpress().FormLayout(settings =>
+   {
+       settings.Name = "formLayout";
+       settings.EncodeHtml = false;
+       settings.UseDefaultPaddings = false;
+       settings.Width = Unit.Percentage(100);
+
+       var groupItem = settings.Items.AddGroupItem(i =>
+       {
+           i.Caption = "DataBase Information";
+           i.SettingsItemHelpTexts.Position = HelpTextPosition.Bottom;
+       });
+
+       groupItem.Items.Add(m => m.ServerName, i =>
+       {
+           i.HelpText = "Please, enter server name";
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+
+       groupItem.Items.Add(m => m.DatabaseName, i =>
+       {
+           i.HelpText = "Please, enter data base";
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+
+       groupItem.Items.Add(m => m.UserName, i =>
+       {
+           i.HelpText = "Please, enter user name";
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+
+       groupItem.Items.Add(m => m.Password, i =>
+       {
+           i.HelpText = "Please, enter password";
+           i.NestedExtension().TextBox(s => s.Width = Unit.Percentage(100));
+       });
+
+       groupItem.GroupBoxDecoration = GroupBoxDecoration.Box;
+       groupItem.ShowCaption = DefaultBoolean.True;
+       groupItem.SettingsItems.ShowCaption = DefaultBoolean.True;
+       groupItem.SettingsItemCaptions.Location = LayoutItemCaptionLocation.Top;
+       groupItem.SettingsItemCaptions.HorizontalAlign = FormLayoutHorizontalAlign.Left;
+       groupItem.SettingsItemCaptions.VerticalAlign = FormLayoutVerticalAlign.Bottom;
+
+
+       groupItem.Items.Add(itemSettings =>
+            {
+                itemSettings.ShowCaption = DefaultBoolean.False;
+                itemSettings.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+                itemSettings.SetNestedContent(() =>
+                {
+                    Html.DevExpress().Button(btnSettings =>
+                    {
+                        btnSettings.Name = "btnUpdate";
+                        btnSettings.Text = "Save";
+                        btnSettings.ControlStyle.CssClass = "flButton";
+                        btnSettings.UseSubmitBehavior = true;
+                    }).Render();
+                    Html.DevExpress().Button(btnSettings =>
+                    {
+                        btnSettings.Name = "btnClear";
+                        btnSettings.Text = "Clear";
+                        btnSettings.ControlStyle.CssClass = "flButton";
+                        btnSettings.ClientSideEvents.Click = "function(s, e){ ASPxClientEdit.ClearEditorsInContainer(); }";
+                    }).Render();
+                });
+            });
+
+   }).GetHtml()
+    </div>
+
+    <div style="color: red;">
+        @ViewBag.MessageError
+    </div>
+}
+
+@*@using (Html.BeginForm("saveSetting", "Setting", FormMethod.Post, new { id = "ValidationForm", @class = "edit_form" }))
+    {
+        @Html.DevExpress().FormLayout(settings =>
+    {
+        settings.Name = "ValidationFormLayout";
+        settings.ControlStyle.CssClass = "formLayoutMaxWidth";
+        settings.Width = 400;
+        settings.UseDefaultPaddings = false;
+        settings.Items.Add(model => model.ServerName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(textBoxSettings =>
+            {
+                textBoxSettings.Properties.ValidationSettings.Display = Display.None;
+            });
+        });
+
+        settings.Items.Add(model => model.DatabaseName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(textBoxSettings =>
+            {
+                textBoxSettings.Properties.ValidationSettings.Display = Display.None;
+            });
+        });
+
+        settings.Items.Add(model => model.UserName, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(textBoxSettings =>
+            {
+                textBoxSettings.Properties.ValidationSettings.Display = Display.None;
+            });
+        });
+
+        settings.Items.Add(model => model.Password, itemSettings =>
+        {
+            itemSettings.NestedExtension().TextBox(textBoxSettings =>
+            {
+                textBoxSettings.Properties.ValidationSettings.Display = Display.None;
+            });
+        });
+
+        settings.Items.Add(itemSettings => {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.SetNestedContent(() =>
+                Html.DevExpress().ValidationSummary().Render()
+            );
+        });
+
+        settings.Items.Add(itemSettings => {
+            itemSettings.ShowCaption = DefaultBoolean.False;
+            itemSettings.HorizontalAlign = FormLayoutHorizontalAlign.Right;
+            itemSettings.SetNestedContent(() => {
+                Html.DevExpress().Button(btnSettings => {
+                    btnSettings.Name = "btnUpdate";
+                    btnSettings.Text = "Send";
+                    btnSettings.ControlStyle.CssClass = "flButton";
+                    btnSettings.UseSubmitBehavior = true;
+                }).Render();
+                Html.DevExpress().Button(btnSettings => {
+                    btnSettings.Name = "btnClear";
+                    btnSettings.Text = "Clear";
+                    btnSettings.ControlStyle.CssClass = "flButton";
+                    btnSettings.ClientSideEvents.Click = "function(s, e){ ASPxClientEdit.ClearEditorsInContainer(); }";
+                }).Render();
+            });
+        });
+
+
+    }).GetHtml()
+    }*@

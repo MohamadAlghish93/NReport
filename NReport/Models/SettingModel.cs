@@ -2,34 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
-namespace NReport.Models
+namespace NReport
 {
     public class SettingModel
     {
-        ///<summary>
-        /// Gets or sets ServerName.
-        ///</summary>
+        [Display(Name = "Server Name:")]
+        [Required(ErrorMessage = "Server Name is required")]
         public string ServerName { get; set; }
 
-        ///<summary>
-        /// Gets or sets DatabaseName.
-        ///</summary>
+        [Display(Name = "Data Base:")]
+        [Required(ErrorMessage = "Data Base is required")]
         public string DatabaseName { get; set; }
 
-        ///<summary>
-        /// Gets or sets UserName.
-        ///</summary>
+        [Display(Name = "User Name:")]
+        [Required(ErrorMessage = "User Name is required")]
         public string UserName { get; set; }
 
-        ///<summary>
-        /// Gets or sets Password.
-        ///</summary>
+        [Display(Name = "Password:")]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
-        ///<summary>
-        /// Gets or sets Password.
-        ///</summary>
-        public string tarasolURL { get; set; }
     }
 }

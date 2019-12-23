@@ -267,6 +267,7 @@
     <Content Include="Views\Designer\ViewExist.cshtml" />
     <Content Include="Views\Designer\LeftPanelPartial.cshtml" />
     <Content Include="Views\Designer\GridViewPartial.cshtml" />
+    <Content Include="Views\Setting\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -289,6 +290,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\SettingsHelper.cs" />
     <Compile Include="DAL\SessionFactory.cs" />
     <Compile Include="DAL\TSOUTERREPORT.cs" />
     <Compile Include="Global.asax.cs">
@@ -307,7 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Reports\" />
-    <Folder Include="Views\Setting\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
